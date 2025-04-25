@@ -8,7 +8,10 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
-# Asegurarse de que el directorio storage existe
 RUN mkdir -p /var/www/html/storage && \
     chown -R www-data:www-data /var/www/html/storage && \
     chmod -R 775 /var/www/html/storage
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
