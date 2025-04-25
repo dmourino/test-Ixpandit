@@ -24,7 +24,7 @@ class PokemonSearchTest extends TestCase
             ])
         ]);
 
-        $response = $this->get('/pokemons?search=pika');
+        $response = $this->get('/?search=pika');
 
         $response->assertStatus(200);
         $response->assertSee('pikachu');
