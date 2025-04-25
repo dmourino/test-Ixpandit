@@ -8,5 +8,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
-RUN chown -R www-data:www-data /var/www/html/storage && \
+# Asegurarse de que el directorio storage existe
+RUN mkdir -p /var/www/html/storage && \
+    chown -R www-data:www-data /var/www/html/storage && \
     chmod -R 775 /var/www/html/storage
