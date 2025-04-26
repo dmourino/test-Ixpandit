@@ -2,10 +2,17 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
 class PokemonService
 {
+    const API_URL = 'https://pokeapi.co/api/v2/pokemon?limit=1300';
+    public function getAllPokemons()
+    {
+        $response = Http::get(PokemonService::API_URL);
+        return collect($response->json()['results'] ?? []);
+    }
     public function filterAndAddImages($allPokemons, $search)
     {
         return $allPokemons->filter(function ($pokemon) use ($search) {

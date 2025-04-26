@@ -25,8 +25,7 @@ class PokemonController extends Controller
         $page = max((int)$request->query('page', 1), 1);
         $perPage = 10;
 
-        $response = Http::get("https://pokeapi.co/api/v2/pokemon?limit=1300");
-        $allPokemons = collect($response->json()['results'] ?? []);
+        $allPokemons = $this->pokemonService->getAllPokemons();
 
         $filtered = $this->pokemonService->filterAndAddImages($allPokemons, $search);
 
